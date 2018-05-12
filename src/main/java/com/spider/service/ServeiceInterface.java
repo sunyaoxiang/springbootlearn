@@ -1,6 +1,7 @@
 package com.spider.service;
 
 import com.spider.entity.BondSpiderAnnoInfo;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * Created by yaoxiang.sun on 2018/5/3.
  */
 @Repository
+@Qualifier("datayesDataSource")
 public interface ServeiceInterface extends CrudRepository<BondSpiderAnnoInfo, String> {
 
     List<BondSpiderAnnoInfo> findByTickerSymbol(String TICKER_SYMBOL);
@@ -19,14 +21,14 @@ public interface ServeiceInterface extends CrudRepository<BondSpiderAnnoInfo, St
 //
 //    public List<BondSpiderAnnoInfo> findByPulishDate(Date publishDate) {
 //        String sql = "SELECT " +
-//                "`id`," +
-//                "`tickerSymbol`," +
-//                "`secShortName`," +
-//                " `publishDate`" +
+//                "[id]," +
+//                "[tickerSymbol]," +
+//                "[secShortName]," +
+//                " [publishDate]" +
 //                "  FROM " +
-//                "`bond_spider_anno_info` " +
+//                "[bond_spider_anno_info] " +
 //                "where " +
-//                "`PUBLISH_DATE` = \'" + publishDate + "\'";
+//                "[PUBLISH_DATE] = \'" + publishDate + "\'";
 //
 //        return (List<BondSpiderAnnoInfo>) jdbcTemplate.query(sql, new RowMapper<BondSpiderAnnoInfo>() {
 //

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 /**
  * Created by yaoxiang.sun on 2018/5/3.
  */
-@RestController
+//@RestController
 public class BondSpiderAnnoInfoController {
 
     @Autowired
@@ -23,17 +22,22 @@ public class BondSpiderAnnoInfoController {
     //    @RequestMapping("/d")
     @RequestMapping(value = {"/api/v1/test"}, method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String getWorkDay(HttpServletResponse response) {
-//    public BondSpiderAnnoInfo getWorkDay(HttpServletResponse response) {
+//    public String getWorkDay(HttpServletResponse response) {
+    public List<BondSpiderAnnoInfo> getWorkDay(HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
 
         List<BondSpiderAnnoInfo> bondSpiderAnnoInfos = serveiceInterface.findByTickerSymbol("1880048");
 
-        for (BondSpiderAnnoInfo entity : bondSpiderAnnoInfos) {
-            if (entity != null) {
-                return entity.getTickerSymobol() + "|" + entity.getSecShortName() + "|" + entity.getPublishDate();
-            }
+//        for (BondSpiderAnnoInfo entity : bondSpiderAnnoInfos) {
+//            if (entity != null) {
+//                return entity.getTickerSymobol() + "|" + entity.getSecShortName() + "|" + entity.getPublishDate();
+//            }
+//        }
+//        return "-1";
+        if (bondSpiderAnnoInfos.isEmpty() == false) {
+            return bondSpiderAnnoInfos;
         }
-        return "-1";
+
+        return null;
     }
 }
