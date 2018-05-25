@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<head>
+    <meta charset="UTF-8">
+    <title>AnnoInfo</title>
+</head>
+<body>
+    <h2>相等清单</h2>
+    <div>
+        <ul>
+            <li  th:each="report:${reportAll}">
+                <span th:text="${report.ID}"></span>-
+                <span th:text="${report.tikcerSymbol}"></span>-
+                <span th:text="${report.companyName}"></span>-
+                <span th:text="${report.title}"></span>-
+                <span th:text="${report.partingCotent}"></span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
