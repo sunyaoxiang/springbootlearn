@@ -27,7 +27,6 @@ public class FileUploadController {
     public String handleFormUpload(@RequestParam("file") MultipartFile file) throws IOException {
 
         if (!file.isEmpty()) {
-            byte[] bytes = file.getBytes();
             String filename = file.getOriginalFilename();
             String filemainname = filename;
             String suffix = "";
@@ -39,7 +38,10 @@ public class FileUploadController {
             Calendar now = Calendar.getInstance();
 //            String path = ".\\src\\main\\resources\\upload\\";
             String timetag = new SimpleDateFormat("yyyyMMddHHmmss").format(now.getTime());
+
             FileOutputStream outStream = new FileOutputStream(path + filemainname + timetag + suffix);
+
+            byte[] bytes = file.getBytes();
             outStream.write(bytes);
             outStream.close();
             return "uploadSuccess";
