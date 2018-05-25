@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -28,7 +26,7 @@ public class BondSpiderAnnoInfoController {
     public String listAnnoInfo(Model model) {
 //        response.addHeader("Access-Control-Allow-Origin", "*");
 
-        List<BondSpiderAnnoInfo> bondSpiderAnnoInfos = serveiceInterface.findAll();
+        List<BondSpiderAnnoInfo> bondSpiderAnnoInfos = serveiceInterface.findByTickerSymbol("136807");
 
 
         model.addAttribute("anninfos", bondSpiderAnnoInfos);
