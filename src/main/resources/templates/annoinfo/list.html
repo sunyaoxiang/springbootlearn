@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<head>
+    <meta charset="UTF-8">
+    <title>AnnoInfo</title>
+</head>
+<body>
+    <h2>清单列表</h2>
+    <div>
+        <ul>
+            <li  th:each="anninfo:${anninfos}">
+                <span th:text="${anninfo.id}"></span>-
+                <span th:text="${anninfo.getTickerSymobol()}"></span>-
+                <span th:text="${anninfo.getSecShortName()}"></span>-
+                <span th:text="${anninfo.getPublishDate()}"></span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
