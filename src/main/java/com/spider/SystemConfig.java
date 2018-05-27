@@ -33,6 +33,11 @@ public class SystemConfig {
         return properties == null ? null : properties.getProperty(key);
     }
 
+    public static String getCheckDataDir() {
+        String key = "spring.check_data_dir";
+        return properties == null ? null : properties.getProperty(key);
+    }
+
     @Value("${spring.uploaddir}")
     private static String getUpLoadDirs;
 

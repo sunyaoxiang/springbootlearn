@@ -2,13 +2,30 @@
 <!--<html xmlns:th="http://www.thymeleaf.org">-->
 <head>
     <meta charset="UTF-8">
-    <title>AnnoInfo</title>
+    <title>研报评级对比</title>
 </head>
+<style>
+    #child_1{float:left;}
+
+    #child_2{float:right;}
+</style>
 <body>
-    <h2>相等清单</h2>
-    <div>
+    <div id="child_1">
+        <h2>朝阳匹配清单</h2>
         <ul>
-            <li  th:each="report:${reportAll}">
+            <li  th:each="report:${zhaoyangDataEqualList}">
+                <span th:text="${report.ID}"></span>-
+                <span th:text="${report.tikcerSymbol}"></span>-
+                <span th:text="${report.companyName}"></span>-
+                <span th:text="${report.title}"></span>-
+                <span th:text="${report.partingCotent}"></span>
+            </li>
+        </ul>
+    </div>
+    <div id="child_2">
+        <h2>算法匹配清单</h2>
+        <ul>
+            <li  th:each="report:${algDataEqualList}">
                 <span th:text="${report.ID}"></span>-
                 <span th:text="${report.tikcerSymbol}"></span>-
                 <span th:text="${report.companyName}"></span>-

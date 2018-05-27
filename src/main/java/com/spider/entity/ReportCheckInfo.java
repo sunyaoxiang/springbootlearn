@@ -8,14 +8,14 @@ import java.util.List;
  * Created by yaoxiang.sun on 2018/5/25.
  */
 //@Entity
-public class ReportAllCount {
+public class ReportCheckInfo {
     private Integer ID;
     private String tikcerSymbol;
     private String companyName;
     private String title;
     private String partingCotent;
 
-    public ReportAllCount(Integer ID, String tikcerSymbol, String companyName, String title, String partingCotent) {
+    public ReportCheckInfo(Integer ID, String tikcerSymbol, String companyName, String title, String partingCotent) {
         this.ID = ID;
         this.tikcerSymbol = tikcerSymbol;
         this.companyName = companyName;
@@ -23,7 +23,7 @@ public class ReportAllCount {
         this.partingCotent = partingCotent;
     }
 
-    public ReportAllCount(List reportMsg) {
+    public ReportCheckInfo(List reportMsg) {
         this.ID = Integer.valueOf(reportMsg.get(0).toString());
         this.tikcerSymbol = reportMsg.get(1).toString();
         this.companyName = reportMsg.get(2).toString();
