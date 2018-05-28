@@ -1,8 +1,8 @@
-package com.spider.controller;
+package com.reportcheck.controller;
 
-import com.spider.SystemConfig;
-import com.spider.entity.ReportCheckInfo;
-import com.spider.entity.ReportListInfo;
+import com.reportcheck.SystemConfig;
+import com.reportcheck.entity.ReportCheckInfo;
+import com.reportcheck.entity.ReportListInfo;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +35,7 @@ public class ReportCheckInfoController {
 
         JSONObject json = getJSONobjectByFileName(filename);
 
-        ArrayList<ReportListInfo> allReportList  = new ArrayList<ReportListInfo>();
+        ArrayList<ReportListInfo> allReportList = new ArrayList<ReportListInfo>();
 
         List<List> group_dict_up = json.getJSONArray("group_dict_up");
         for (List each : group_dict_up) {

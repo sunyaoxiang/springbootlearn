@@ -1,0 +1,17 @@
+spring.datasource.url = jdbc:sqlserver://localhost:1433;DatabaseName=db
+spring.datasource.username = username
+spring.datasource.password= password
+spring.datasource.driver-class-name = com.microsoft.sqlserver.jdbc.SQLServerDriver
+spring.jpa.properties.hibernate.default_schema = dbo
+
+
+
+spring.jpa.properties.hibernate.default_schema = dbo
+server.port=${port:8088}
+
+spring.thymeleaf.prefix=classpath:/templates/
+spring.uploaddir=./src/main/resources/upload/
+
+#spring.http.multipart.location=classpath:/upload/
+#spring.http.multipart.maxFileSize=10Mb
+#spring.http.multipart.maxRequestSize=10Mb

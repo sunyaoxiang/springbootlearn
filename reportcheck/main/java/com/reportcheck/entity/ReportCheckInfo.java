@@ -1,4 +1,4 @@
-package com.spider.entity;
+package com.reportcheck.entity;
 
 
 import java.util.List;
