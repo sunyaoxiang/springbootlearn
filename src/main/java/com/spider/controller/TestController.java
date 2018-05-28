@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * Created by yaoxiang.sun on 2018/5/3.
  */
-@RestController
-@RequestMapping(value = {"/api/v1/{tickerSymbol}"})
+//@RestController
+//@RequestMapping(value = {"/api/v1/{tickerSymbol}"})
 public class TestController {
     private final ServeiceInterface serveiceInterface;
 

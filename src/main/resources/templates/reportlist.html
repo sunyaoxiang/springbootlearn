@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF8">
+    <title>研报评级对比</title>
+</head>
+
+<body>
+<div>
+    <h2>检查清单</h2>
+    <ul>
+        <table   border="1">
+            <tr>
+                <th>代码</th>
+                <th>名称</th>
+                <th>总数</th>
+                <th>标题匹配+评级相等</th>
+                <th>仅标题匹配</th>
+                <th>完全不匹配</th>
+            </tr>
+            <tr th:each="report:${alg_group_data}">
+                <td ><a th:text="${report.tikcerSymbol}" th:href="@{'./'+${report.tikcerSymbol}}"></a></td>
+                <td th:text="${report.companyName}"></td>
+                <td th:text="${report.algDataEqualListLen} + ${report.algDataUnequalListLen} + ${report.algDataAllListLen}"></td>
+                <td th:text="${report.algDataEqualListLen}"></td>
+                <td th:text="${report.algDataUnequalListLen}"></td>
+                <td th:text="${report.algDataAllListLen}"></td>
+            </tr>
+        </table>
+    </ul>
+</div>
+</body>
+</html>

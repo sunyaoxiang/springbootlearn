@@ -1,7 +1,6 @@
 package com.spider.controller;
 
 import com.spider.SystemConfig;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +15,7 @@ import java.util.Calendar;
 /**
  * Created by yaoxiang.sun on 2018/5/9.
  */
-@Controller
+//@Controller
 public class FileUploadController {
     @GetMapping("/upload")
     public String html() {

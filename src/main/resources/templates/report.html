@@ -1,38 +1,96 @@
 <!DOCTYPE html>
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF8">
     <title>研报评级对比</title>
 </head>
-<style>
-    #child_1{float:left;}
+<style type="text/css">
+    <!--
+    #content {
+        width: 100%;
+    }
 
-    #child_2{float:right;}
+    #content div.left {
+        float: left;
+        width: 48%;
+    }
+    #content div.right {
+        float: right;
+        margin-left: auto;
+        width: 48%;
+    }
+
+    -->
 </style>
+
 <body>
-    <div id="child_1">
-        <h2>朝阳匹配清单</h2>
-        <ul>
-            <li  th:each="report:${zhaoyangDataEqualList}">
-                <span th:text="${report.ID}"></span>-
-                <span th:text="${report.tikcerSymbol}"></span>-
-                <span th:text="${report.companyName}"></span>-
-                <span th:text="${report.title}"></span>-
-                <span th:text="${report.partingCotent}"></span>
-            </li>
-        </ul>
+<a href="all">返回</a>
+<div id="content">
+    <div class="left">
+        <table style="width: 100%;TABLE-LAYOUT:fixed;word-break:break-all" border="1">
+            <caption><b>朝阳匹配清单</b></caption>
+            <tr th:each="report:${zhaoyang_data_equal_list}">
+                <td th:text="${report.ID}"></td>
+                <td th:text="${report.tikcerSymbol}"></td>
+                <td th:text="${report.companyName}"></td>
+                <td th:text="${report.title}"></td>
+                <td th:text="${report.partingCotent}"></td>
+            </tr>
+        </table>
+        <table style="width: 100%;TABLE-LAYOUT:fixed;word-break:break-all" border="1">
+            <caption><b>朝阳标题匹配,评级不匹配清单</b></caption>
+            <tr th:each="report:${zhaoyang_data_unequal_list}">
+                <td th:text="${report.ID}"></td>
+                <td th:text="${report.tikcerSymbol}"></td>
+                <td th:text="${report.companyName}"></td>
+                <td th:text="${report.title}"></td>
+                <td th:text="${report.partingCotent}"></td>
+            </tr>
+        </table>
+        <table style="width: 100%;TABLE-LAYOUT:fixed;word-break:break-all" border="1">
+            <caption><b>朝阳未匹配清单</b></caption>
+            <tr th:each="report:${zhaoyang_data_all_list}">
+                <td th:text="${report.ID}"></td>
+                <td th:text="${report.tikcerSymbol}"></td>
+                <td th:text="${report.companyName}"></td>
+                <td th:text="${report.title}"></td>
+                <td th:text="${report.partingCotent}"></td>
+            </tr>
+        </table>
     </div>
-    <div id="child_2">
-        <h2>算法匹配清单</h2>
-        <ul>
-            <li  th:each="report:${algDataEqualList}">
-                <span th:text="${report.ID}"></span>-
-                <span th:text="${report.tikcerSymbol}"></span>-
-                <span th:text="${report.companyName}"></span>-
-                <span th:text="${report.title}"></span>-
-                <span th:text="${report.partingCotent}"></span>
-            </li>
-        </ul>
+
+    <div class="right">
+        <table style="width: 100%;TABLE-LAYOUT:fixed;word-break:break-all" border="1">
+            <caption><b>算法匹配清单</b></caption>
+            <tr th:each="report:${alg_data_equal_list}">
+                <td th:text="${report.title}"></td>
+                <td th:text="${report.partingCotent}"></td>
+                <td th:text="${report.ID}"></td>
+                <td th:text="${report.tikcerSymbol}"></td>
+                <td th:text="${report.companyName}"></td>
+            </tr>
+        </table>
+        <table style="width: 100%;TABLE-LAYOUT:fixed;word-break:break-all" border="1">
+            <caption><b>算法标题匹配,评级不匹配清单</b></caption>
+            <tr th:each="report:${alg_data_unequal_list}">
+                <td th:text="${report.title}"></td>
+                <td th:text="${report.partingCotent}"></td>
+                <td th:text="${report.ID}"></td>
+                <td th:text="${report.tikcerSymbol}"></td>
+                <td th:text="${report.companyName}"></td>
+            </tr>
+        </table>
+        <table style="width: 100%;TABLE-LAYOUT:fixed;word-break:break-all" border="1">
+            <caption><b>算法未匹配清单</b></caption>
+            <tr th:each="report:${alg_data_all_list}">
+                <td th:text="${report.title}"></td>
+                <td th:text="${report.partingCotent}"></td>
+                <td th:text="${report.ID}"></td>
+                <td th:text="${report.tikcerSymbol}"></td>
+                <td th:text="${report.companyName}"></td>
+            </tr>
+        </table>
     </div>
+</div>
 </body>
 </html>

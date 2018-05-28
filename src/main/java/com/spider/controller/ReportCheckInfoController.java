@@ -2,6 +2,7 @@ package com.spider.controller;
 
 import com.spider.SystemConfig;
 import com.spider.entity.ReportCheckInfo;
+import com.spider.entity.ReportListInfo;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,40 +24,119 @@ import java.util.List;
 @RequestMapping("/report")
 public class ReportCheckInfoController {
 
-//    @RequestMapping(value = "/{tikcerSymbol}", method = RequestMethod.GET)
-//    public String listReportInfo(Model model, @PathVariable("tikcerSymbol") String tikcerSymbol) {
-//        ArrayList<ReportCheckInfo> reportCheckInfoList = getJsonFromFile(tikcerSymbol);
-//
-//        model.addAttribute("reportAll", reportCheckInfoList);
-//
-//        return "report";
-//    }
+    @RequestMapping(value = {"/all", "/"}, method = RequestMethod.GET)
+    public String allReportList(Model model) {
+        String group_dict = "group_dict_up";
+        String filename = SystemConfig.getCheckDataDir() + group_dict + ".json";
+        File file = new File(filename);
+        if (!file.exists()) {
+            return null;
+        }
+
+        JSONObject json = getJSONobjectByFileName(filename);
+
+        ArrayList<ReportListInfo> allReportList  = new ArrayList<ReportListInfo>();
+
+        List<List> group_dict_up = json.getJSONArray("group_dict_up");
+        for (List each : group_dict_up) {
+            allReportList.add(new ReportListInfo(each));
+        }
+
+        model.addAttribute("alg_group_data", allReportList);
+
+        return "reportlist";
+    }
 
     @RequestMapping(value = "/{tikcerSymbol}", method = RequestMethod.GET)
     public String listReportInfo(Model model, @PathVariable("tikcerSymbol") String tikcerSymbol) {
 
         ArrayList reportCheckInfoList = getJsonFromFile(tikcerSymbol);
         if (reportCheckInfoList != null) {
-            model.addAttribute("zhaoyangDataEqualList", reportCheckInfoList.get(0));
-            model.addAttribute("algDataEqualList", reportCheckInfoList.get(1));
+            model.addAttribute("alg_data_equal_list", reportCheckInfoList.get(0));
+            model.addAttribute("zhaoyang_data_equal_list", reportCheckInfoList.get(1));
+            model.addAttribute("alg_data_unequal_list", reportCheckInfoList.get(2));
+            model.addAttribute("zhaoyang_data_unequal_list", reportCheckInfoList.get(3));
+            model.addAttribute("alg_data_all_list", reportCheckInfoList.get(4));
+            model.addAttribute("zhaoyang_data_all_list", reportCheckInfoList.get(5));
             return "report";
         }
-        return "upload";
+        return "/report/all";
     }
 
     public static ArrayList<ReportCheckInfo> getJsonFromFile(String tikcerSymbol) {
         String filename = SystemConfig.getCheckDataDir() + tikcerSymbol + ".json";
-        File file  = new File(filename);
+        File file = new File(filename);
         if (!file.exists()) {
             return null;
         }
-        ArrayList<ReportCheckInfo> zhaoyangDataEqualList = new ArrayList<ReportCheckInfo>();
+
+//        alg_data_equal_list;
         ArrayList<ReportCheckInfo> algDataEqualList = new ArrayList<ReportCheckInfo>();
+//        zhaoyang_data_equal_list;
+        ArrayList<ReportCheckInfo> zhaoyangDataEqualList = new ArrayList<ReportCheckInfo>();
+
+//        alg_data_unequal_list;
+        ArrayList<ReportCheckInfo> algDataUnequalList = new ArrayList<ReportCheckInfo>();
+//        zhaoyang_data_unequal_list;
+        ArrayList<ReportCheckInfo> zhaoyangDataUnequalList = new ArrayList<ReportCheckInfo>();
+
+//        alg_data_all_list;
+        ArrayList<ReportCheckInfo> algDataAllList = new ArrayList<>();
+//        zhaoyang_data_all_list;
+        ArrayList<ReportCheckInfo> zhaoyangDataAllList = new ArrayList<ReportCheckInfo>();
 
         ArrayList arrayList = new ArrayList();
-        arrayList.add(zhaoyangDataEqualList);
-        arrayList.add(algDataEqualList);
 
+        arrayList.add(algDataEqualList);
+        arrayList.add(zhaoyangDataEqualList);
+
+        arrayList.add(algDataUnequalList);
+        arrayList.add(zhaoyangDataUnequalList);
+
+
+        arrayList.add(algDataAllList);
+        arrayList.add(zhaoyangDataAllList);
+
+
+        JSONObject json = getJSONobjectByFileName(filename);
+
+        List<List> alg_data_equal_list = json.getJSONArray("alg_data_equal_list");
+        for (List each : alg_data_equal_list) {
+            algDataEqualList.add(new ReportCheckInfo(each));
+        }
+
+        List<List> zhaoyang_data_equal_list = json.getJSONArray("zhaoyang_data_equal_list");
+        for (List each : zhaoyang_data_equal_list) {
+//                ReportCheckInfo reportCheckInfo = new ReportCheckInfo(each);
+            zhaoyangDataEqualList.add(new ReportCheckInfo(each));
+        }
+
+        List<List> alg_data_unequal_list = json.getJSONArray("alg_data_unequal_list");
+        for (List each : alg_data_unequal_list) {
+            algDataUnequalList.add(new ReportCheckInfo(each));
+        }
+
+        List<List> zhaoyang_data_unequal_list = json.getJSONArray("zhaoyang_data_unequal_list");
+        for (List each : zhaoyang_data_unequal_list) {
+            zhaoyangDataUnequalList.add(new ReportCheckInfo(each));
+        }
+
+        List<List> alg_data_all_list = json.getJSONArray("alg_data_all_list");
+        for (List each : alg_data_all_list) {
+            algDataAllList.add(new ReportCheckInfo(each));
+        }
+
+        List<List> zhaoyang_data_all_list = json.getJSONArray("zhaoyang_data_all_list");
+        for (List each : zhaoyang_data_all_list) {
+            zhaoyangDataAllList.add(new ReportCheckInfo(each));
+        }
+
+        return arrayList;
+
+    }
+
+    public static JSONObject getJSONobjectByFileName(String filename) {
+        JSONObject json = null;
         try {
             BufferedReader brname;
             brname = new BufferedReader(new FileReader(filename));
@@ -75,32 +155,16 @@ public class ReportCheckInfoController {
                     replace("None", "\'None\'");
 //            System.out.println(allFileStr);
 
-            JSONObject json = JSONObject.fromObject(allFileStr);
+            json = JSONObject.fromObject(allFileStr);
 
-            List<List> zhaoyang_data_equal_list = json.getJSONArray("zhaoyang_data_equal_list");
-
-            for (List each:zhaoyang_data_equal_list) {
-//                ReportCheckInfo reportCheckInfo = new ReportCheckInfo(each);
-                zhaoyangDataEqualList.add(new ReportCheckInfo(each));
-            }
-
-            List<List> alg_data_equal_list = json.getJSONArray("alg_data_equal_list");
-            for (List each:alg_data_equal_list) {
-//                ReportCheckInfo reportCheckInfo = ;
-                algDataEqualList.add(new ReportCheckInfo(each));
-            }
-
-            brname.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        return arrayList;
-
+        return json;
     }
 
-    public static void main(String[] args) {
-        getJsonFromFile("000006");
-    }
+//    public static void main(String[] args) {
+//        allReportList("000006");
+//    }
 
 }

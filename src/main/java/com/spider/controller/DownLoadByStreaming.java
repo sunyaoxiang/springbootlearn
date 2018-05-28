@@ -1,7 +1,6 @@
 package com.spider.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.IOException;
@@ -10,7 +9,7 @@ import java.io.OutputStream;
 /**
  * Created by yaoxiang.sun on 2018/5/8.
  */
-@RestController
+//@RestController
 public class DownLoadByStreaming {
     @RequestMapping("download")
     public StreamingResponseBody handle() {

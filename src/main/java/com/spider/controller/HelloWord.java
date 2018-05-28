@@ -18,9 +18,9 @@ import java.util.Random;
 /**
  * Created by yaoxiang.sun on 2018/5/3.
  */
-@RestController
-@RequestMapping("/h")
-@SessionAttributes("helloClass")
+//@RestController
+//@RequestMapping("/h")
+//@SessionAttributes("helloClass")
 public class HelloWord {
     @RequestMapping("/h")
     public String sayHello(RedirectAttributes attr) {

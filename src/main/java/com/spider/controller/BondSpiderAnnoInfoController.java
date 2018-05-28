@@ -3,7 +3,6 @@ package com.spider.controller;
 import com.spider.entity.BondSpiderAnnoInfo;
 import com.spider.service.ServeiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,8 +11,8 @@ import java.util.List;
 /**
  * Created by yaoxiang.sun on 2018/5/3.
  */
-@Controller
-@RequestMapping("/annoinfo")
+//@Controller
+//@RequestMapping("/annoinfo")
 public class BondSpiderAnnoInfoController {
 
     @Autowired

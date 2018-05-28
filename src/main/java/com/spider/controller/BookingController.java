@@ -1,14 +1,13 @@
 package com.spider.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by yaoxiang.sun on 2018/5/9.
  */
-@Controller
-@RequestMapping("/hotels/{hotel}")
+//@Controller
+//@RequestMapping("/hotels/{hotel}")
 public class BookingController {
 
     @RequestMapping("/bookings/{booking}")
