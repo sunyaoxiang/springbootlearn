@@ -8,8 +8,13 @@
 <body>
 <div>
     <h2>检查清单</h2>
+    <a th:text="'第'+${pageInfo.get(0)} + '页'"></a>
+    <a th:text="'总:'+${pageInfo.get(2)}+ '条记录'"></a>
+    <a th:text="'总:'+${pageInfo.get(3)}+ '页'"></a>
+    <a th:text="上一页" th:if=" ${pageInfo.get(0)} gt '0'" th:href="@{'../'+${pageInfo.get(0)- 1} + '/' + ${pageInfo.get(1)}}"}></a>
+    <a th:text="下一页" th:if=" ${pageInfo.get(0)} lt ${pageInfo.get(3)}" th:href="@{'../'+${pageInfo.get(0)+ 1} + '/' + ${pageInfo.get(1)}}"></a>
     <ul>
-        <table   border="1">
+        <table border="1">
             <tr>
                 <th>代码</th>
                 <th>名称</th>
@@ -19,7 +24,7 @@
                 <th>完全不匹配</th>
             </tr>
             <tr th:each="report:${alg_group_data}">
-                <td ><a th:text="${report.tikcerSymbol}" th:href="@{'./'+${report.tikcerSymbol}}"></a></td>
+                <td><a th:text="${report.tikcerSymbol}" th:href="@{'./'+${report.tikcerSymbol}}"></a></td>
                 <td th:text="${report.companyName}"></td>
                 <td th:text="${report.algDataEqualListLen} + ${report.algDataUnequalListLen} + ${report.algDataAllListLen}"></td>
                 <td th:text="${report.algDataEqualListLen}"></td>

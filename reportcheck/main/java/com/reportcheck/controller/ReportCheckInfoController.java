@@ -23,9 +23,21 @@ import java.util.List;
 @Controller
 @RequestMapping("/report")
 public class ReportCheckInfoController {
+//    @RequestMapping("/find/mybatis/page")
+//    public String findUserPageFromMybatis(HttpServletRequest request, Integer pageNum, Integer pageSize) {
+//        pageNum = pageNum == null ? 1 : pageNum;
+//        pageSize = pageSize == null ? 10 : pageSize;
+//        PageHelper.startPage(pageNum, pageSize);
+//        List<UserMo> list = userMapper.selectUserList();
+//        PageInfo pageInfo = new PageInfo(list);
+//        Page page = (Page) list;
+//        return "PageInfo: " + JSON.toJSONString(pageInfo) + ", Page: " + JSON.toJSONString(page);
+//    }
 
-    @RequestMapping(value = {"/all", "/"}, method = RequestMethod.GET)
-    public String allReportList(Model model) {
+    @RequestMapping(value = {"/list/{pageNum}/{pageSize}"}, method = RequestMethod.GET)
+    public String allReportList(Model model, @PathVariable("pageNum") Integer pageNum, @PathVariable("pageSize") Integer pageSize) {
+        pageNum = pageNum == null ? 1 : pageNum;
+        pageSize = pageSize == null ? 50 : pageSize;
         String group_dict = "group_dict_up";
         String filename = SystemConfig.getCheckDataDir() + group_dict + ".json";
         File file = new File(filename);
@@ -37,12 +49,33 @@ public class ReportCheckInfoController {
 
         ArrayList<ReportListInfo> allReportList = new ArrayList<ReportListInfo>();
 
-        List<List> group_dict_up = json.getJSONArray("group_dict_up");
-        for (List each : group_dict_up) {
-            allReportList.add(new ReportListInfo(each));
+        List<List> groupDictUp = json.getJSONArray("group_dict_up");
+
+
+
+//        Integer lastPageNum = groupDictUp.size() % pageSize;
+        Integer infosCount = groupDictUp.size();
+        Integer pagesCount = infosCount / pageSize;Integer startNum = pageNum * pageSize;
+        Integer endNum = (pageNum + 1) * pageSize < infosCount ? (pageNum + 1) * pageSize : infosCount;
+
+        ArrayList<Integer>  pageInfo = new ArrayList<Integer>();
+        pageInfo.add(pageNum);
+        pageInfo.add(pageSize);
+        pageInfo.add(infosCount);
+        pageInfo.add(pagesCount);
+        pageInfo.add(startNum);
+        pageInfo.add(endNum);
+
+        for (int i = startNum; i < endNum; i++) {
+            allReportList.add(new ReportListInfo(groupDictUp.get(i)));
         }
 
+//        for (List each : groupDictUp) {
+//            allReportList.add(new ReportListInfo(each));
+//        }
+
         model.addAttribute("alg_group_data", allReportList);
+        model.addAttribute("pageInfo", pageInfo);
 
         return "reportlist";
     }
