@@ -29,7 +29,7 @@ public class SecurityAdminController {
 
     @ResponseBody
     @RequestMapping(value = "/adminrequire", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("hasAnyRole('admin')")  // 实际对应ROLE_admin
     public String adminRequire(HttpServletResponse httpServletResponse) {
         System.out.println(httpServletResponse.getHeaderNames());
         return "This is only for admin.";
@@ -37,7 +37,7 @@ public class SecurityAdminController {
 
     @ResponseBody
     @RequestMapping(value = "/developquire", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('develop')")
+    @PreAuthorize("hasRole('develop')") // 实际对应ROLE_develop
     public String developRequire() {
         return "This is only for develop.";
     }

@@ -5,6 +5,14 @@ import javax.persistence.*;
 /**
  * Created by yaoxiang.sun on 2018/5/30.
  */
+
+
+/**
+ * table:user基本信息
+ * @param {Long} id;
+ * @param {String} nameCn from name_cn;
+ * @param {String} nameEn from name_en;
+ */
 @Entity
 @Table(name = "user")
 public class UserE {

@@ -13,6 +13,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 /**
  * Created by yaoxiang.sun on 2018/5/30.
  */
+
+/**
+ * sercurity具体配置.
+ * 注入 user 生成器.
+ * 添加配置,同时添加密码编码器.
+ * 全局访问控制.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 在运行页面方法前执行校验
@@ -22,18 +29,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    @Autowired
 //    private UserDetailsService userDetailsService;
 
+    //注入 user 生成器;
     @Override
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserAddRoleService();
     }
 
+    //添加配置,同时添加密码编码器.
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService()).passwordEncoder(new MyPasswordEncoder());
     }
 
-
+    //全局访问控制
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

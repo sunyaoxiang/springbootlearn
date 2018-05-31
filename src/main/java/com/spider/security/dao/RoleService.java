@@ -9,6 +9,10 @@ import java.util.List;
 /**
  * Created by yaoxiang.sun on 2018/5/30.
  */
+
+/**
+ * 数据服务
+ */
 @Repository
 public interface RoleService extends CrudRepository<RoleE, String> {
     RoleE findById(Long id);

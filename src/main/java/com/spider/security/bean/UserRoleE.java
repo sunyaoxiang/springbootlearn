@@ -5,6 +5,12 @@ import javax.persistence.*;
 /**
  * Created by yaoxiang.sun on 2018/5/30.
  */
+/**
+ * table:user_role
+ * @param {Long} id;
+ * @param {Long} userId from user_id;
+ * @param {Long} roleId from role_id;
+ */
 @Entity
 @Table(name = "user_role")
 public class UserRoleE {
