@@ -1,7 +1,7 @@
 package com.spider.controller;
 
-import com.spider.entity.BondSpiderAnnoInfo;
-import com.spider.service.ServeiceInterface;
+import com.spider.bean.BondSpiderAnnoInfo;
+import com.spider.service.ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +14,11 @@ import java.util.List;
 //@RestController
 //@RequestMapping(value = {"/api/v1/{tickerSymbol}"})
 public class TestController {
-    private final ServeiceInterface serveiceInterface;
+    private final ServiceInterface serviceInterface;
 
     @Autowired
-    public TestController(ServeiceInterface serveiceInterface) {
-        this.serveiceInterface = serveiceInterface;
+    public TestController(ServiceInterface serviceInterface) {
+        this.serviceInterface = serviceInterface;
     }
 
 //    @RequestMapping("/")
@@ -32,7 +32,7 @@ public class TestController {
     public List<BondSpiderAnnoInfo> getAllBondSpiderAnnoInfo(HttpServletResponse response, @PathVariable("tickerSymbol") String tickerSymbol) {
         response.addHeader("Access-Control-Allow-Origin", "*");
 
-        List<BondSpiderAnnoInfo> bondSpiderAnnoInfos = serveiceInterface.findByTickerSymbol(tickerSymbol);
+        List<BondSpiderAnnoInfo> bondSpiderAnnoInfos = serviceInterface.findByTickerSymbol(tickerSymbol);
         if (bondSpiderAnnoInfos.isEmpty() == false) {
             return bondSpiderAnnoInfos;
         }
@@ -42,7 +42,7 @@ public class TestController {
     @RequestMapping(path = "/first", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String getFirstBondSpiderAnnoInfo(@PathVariable String tickerSymbol) {
-        List<BondSpiderAnnoInfo> bondSpiderAnnoInfos = serveiceInterface.findByTickerSymbol(tickerSymbol);
+        List<BondSpiderAnnoInfo> bondSpiderAnnoInfos = serviceInterface.findByTickerSymbol(tickerSymbol);
         for (BondSpiderAnnoInfo entity : bondSpiderAnnoInfos) {
             if (entity != null) {
                 return entity.getTickerSymobol() + "|" + entity.getSecShortName() + "|" + entity.getPublishDate();

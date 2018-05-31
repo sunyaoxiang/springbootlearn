@@ -70,7 +70,7 @@ public class Application {
 //        <mvc:view-resolvers>
 //        <mvc:content-negotiation>
 //        <mvc:default-views>
-//        <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+//        <service class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
 //        </mvc:default-views>
 //        </mvc:content-negotiation>
 //        <mvc:jsp/>

@@ -1,4 +1,4 @@
-package com.spider.entity;
+package com.spider.bean;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -6,8 +6,8 @@ import java.util.Date;
 /**
  * Created by yaoxiang.sun on 2018/5/3.
  */
-@Entity
-@Table(name = "bond_spider_anno_info")
+//@Entity
+//@Table(name = "bond_spider_anno_info")
 public class BondSpiderAnnoInfo {
     @Id
     @GeneratedValue

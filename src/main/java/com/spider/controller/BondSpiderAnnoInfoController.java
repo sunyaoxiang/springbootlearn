@@ -1,10 +1,9 @@
 package com.spider.controller;
 
-import com.spider.entity.BondSpiderAnnoInfo;
-import com.spider.service.ServeiceInterface;
+import com.spider.bean.BondSpiderAnnoInfo;
+import com.spider.service.ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -16,16 +15,16 @@ import java.util.List;
 public class BondSpiderAnnoInfoController {
 
     @Autowired
-    private ServeiceInterface serveiceInterface;
+    private ServiceInterface serviceInterface;
 
 //    @RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.POST})
 //    , produces = "application/json;charset=UTF-8"
 //    @ResponseBody
-    @RequestMapping("/list")
+//    @RequestMapping("/list")
     public String listAnnoInfo(Model model) {
 //        response.addHeader("Access-Control-Allow-Origin", "*");
 
-        List<BondSpiderAnnoInfo> bondSpiderAnnoInfos = serveiceInterface.findByTickerSymbol("136807");
+        List<BondSpiderAnnoInfo> bondSpiderAnnoInfos = serviceInterface.findByTickerSymbol("136807");
 
 
         model.addAttribute("anninfos", bondSpiderAnnoInfos);
