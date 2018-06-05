@@ -6,7 +6,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>springbootlearn</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<!--<packaging>jar</packaging>-->
+	<packaging>war</packaging>
 
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
@@ -74,7 +75,16 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>  <!--添加 @Slf4j -->
+
+
 	</dependencies>
+
+
 
 	<build>
 		<plugins>
@@ -82,7 +92,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- Docker maven plugin -->
+			<!-- Docker maven plugin
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
@@ -99,7 +109,7 @@
 					</resources>
 				</configuration>
 			</plugin>
-			<!-- Docker maven plugin -->
+			Docker maven plugin -->
 		</plugins>
 	</build>
 

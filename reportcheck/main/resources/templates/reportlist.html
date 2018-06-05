@@ -24,7 +24,7 @@
                 <th>完全不匹配</th>
             </tr>
             <tr th:each="report:${alg_group_data}">
-                <td><a th:text="${report.tikcerSymbol}" th:href="@{'./'+${report.tikcerSymbol}}"></a></td>
+                <td><a th:text="${report.tikcerSymbol}" th:href="@{'http://127.0.0.1:8081/report/'+${report.tikcerSymbol}}"></a></td>
                 <td th:text="${report.companyName}"></td>
                 <td th:text="${report.algDataEqualListLen} + ${report.algDataUnequalListLen} + ${report.algDataAllListLen}"></td>
                 <td th:text="${report.algDataEqualListLen}"></td>

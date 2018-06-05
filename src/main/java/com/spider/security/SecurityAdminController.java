@@ -4,6 +4,7 @@ import com.spider.security.bean.UserE;
 import com.spider.security.dao.RoleService;
 import com.spider.security.dao.UserRoleService;
 import com.spider.security.dao.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by yaoxiang.sun on 2018/5/30.
  */
 @Controller
+@Slf4j
 public class SecurityAdminController {
 
     @Autowired
@@ -32,6 +34,7 @@ public class SecurityAdminController {
     @PreAuthorize("hasAnyRole('admin')")  // 实际对应ROLE_admin
     public String adminRequire(HttpServletResponse httpServletResponse) {
         System.out.println(httpServletResponse.getHeaderNames());
+        log.info("This is only for admin.");
         return "This is only for admin.";
     }
 

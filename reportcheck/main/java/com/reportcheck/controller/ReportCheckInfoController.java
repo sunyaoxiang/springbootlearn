@@ -10,36 +10,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by yaoxiang.sun on 2018/5/25.
  */
+
 @Controller
 @RequestMapping("/report")
+//@Slf4j
 public class ReportCheckInfoController {
-//    @RequestMapping("/find/mybatis/page")
-//    public String findUserPageFromMybatis(HttpServletRequest request, Integer pageNum, Integer pageSize) {
-//        pageNum = pageNum == null ? 1 : pageNum;
-//        pageSize = pageSize == null ? 10 : pageSize;
-//        PageHelper.startPage(pageNum, pageSize);
-//        List<UserMo> list = userMapper.selectUserList();
-//        PageInfo pageInfo = new PageInfo(list);
-//        Page page = (Page) list;
-//        return "PageInfo: " + JSON.toJSONString(pageInfo) + ", Page: " + JSON.toJSONString(page);
-//    }
 
     @RequestMapping(value = {"/list/{pageNum}/{pageSize}"}, method = RequestMethod.GET)
     public String allReportList(Model model, @PathVariable("pageNum") Integer pageNum, @PathVariable("pageSize") Integer pageSize) {
+//        log.info(SystemConfig.getCheckDataDir());
         pageNum = pageNum == null ? 1 : pageNum;
         pageSize = pageSize == null ? 50 : pageSize;
         String group_dict = "group_dict_up";
         String filename = SystemConfig.getCheckDataDir() + group_dict + ".json";
+
         File file = new File(filename);
         if (!file.exists()) {
             return null;
@@ -93,8 +84,9 @@ public class ReportCheckInfoController {
             model.addAttribute("zhaoyang_data_all_list", reportCheckInfoList.get(5));
             return "report";
         }
-        return "/report/all";
+        return "/report/list/0/50";
     }
+
 
     public static ArrayList<ReportCheckInfo> getJsonFromFile(String tikcerSymbol) {
         String filename = SystemConfig.getCheckDataDir() + tikcerSymbol + ".json";
@@ -172,7 +164,8 @@ public class ReportCheckInfoController {
         JSONObject json = null;
         try {
             BufferedReader brname;
-            brname = new BufferedReader(new FileReader(filename));
+//            brname = new BufferedReader(new FileReader(filename));
+            brname = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"));
 //            brname = new BufferedReader(new FileReader("src/main/resources/templates/check_data/" + tikcerSymbol + ".json"));
             String allFileStr = "";
             String lineStr;
@@ -195,9 +188,5 @@ public class ReportCheckInfoController {
         }
         return json;
     }
-
-//    public static void main(String[] args) {
-//        allReportList("000006");
-//    }
 
 }
